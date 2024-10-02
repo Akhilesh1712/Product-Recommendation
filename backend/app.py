@@ -16,13 +16,11 @@ def predict():
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
 
-    # Load the image
+   
     img = Image.open(file)
-    img = img.resize((224, 224))  # Resize to match model input
-    img_array = np.array(img) / 255.0  # Normalize
-    img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
-
-    # Make prediction
+    img = img.resize((224, 224)) 
+    img_array = np.array(img) / 255.0  
+    img_array = np.expand_dims(img_array, axis=0)  
     prediction = model.predict(img_array)
     result = 'defective' if prediction[0][0] > 0.5 else 'non_defective'
 
